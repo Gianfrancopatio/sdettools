@@ -1,0 +1,70 @@
+--@Author G Patio
+--Date 10/11/2020
+--Create table for PostgresSQL insert data and perform queries
+
+
+CREATE TABLE friends
+(
+  friend_id INT,
+  friend_name VARCHAR(100)
+);
+CREATE TABLE pets
+(
+ pet_id INT,
+ owner_id INT,
+ pet_type VARCHAR(100),
+ pet_name VARCHAR(100)
+);
+INSERT INTO friends values(1, 'John');
+INSERT INTO friends values(2, 'Sarah');
+INSERT INTO friends values(3, 'Rachel');
+INSERT INTO friends values(4, 'Sam');
+INSERT INTO pets values(1, 1,    'goldfish',   'Fishy'    );
+INSERT INTO pets values(2, 1,    'goldfish',   'Nemo'     );
+INSERT INTO pets values(3, 1,    'dog',        'Fido'     );
+INSERT INTO pets values(4, 2,    'cat',        'Kitty'    );
+INSERT INTO pets values(5, 2,    'bird',       'Feathers' );
+INSERT INTO pets values(6, 3,    'chinchilla', 'Fuzzy'    );
+INSERT INTO pets values(7, NULL, 'iguana',     'Scales'   );
+
+select * from friends;
+select * from pets;
+
+--Query the count for each table and give it a new name
+Select count(*) friend_count
+from friends;
+
+Select count(pet_id) as pet_count
+from pets;
+
+--Inner Join
+Select * from friends
+inner join pets
+on friends.friend_id = pets.owner_id
+
+--Implicit Joins
+Select * from friends, pets
+where friends.friend_id = pets.owner_id;
+
+--Outer Joins
+
+--Left outer join
+Select * from friends
+left outer join pets
+on friends.friend_id = pets.owner_id
+
+--Right outer join
+Select * from friends
+right outer join pets
+on friends.friend_id = pets.owner_id
+
+--Full outer join
+Select * from friends
+full outer join pets
+on friends.friend_id = pets.owner_id;
+
+--Cross join
+-- cross joins produce a result set in which the  number of rows
+--in the first table multipiled by the number of rows in the second table
+Select * from friends
+cross join pets;
